@@ -1,0 +1,236 @@
+Ques - 1
+----------
+class MyThread extends Thread {
+    public MyThread(String name) {
+        this.setName(name);
+        start();
+        System.out.println("in constructor " + getName());
+    }
+
+    @Override
+    public void start() {
+        System.out.println("in start " + getName());
+    }
+
+    public void run() {
+        System.out.println("in run " + getName());
+    }
+}
+
+public class ThreadTest {
+    public static void main(String[] args) {
+        new MyThread("oops");
+    }
+}
+
+Ans : 
+Ques - 2
+----------
+class MyThread extends Thread {
+    @Override
+    public void run() {
+        System.out.println("In run method; thread name is: " + Thread.currentThread().getName());
+    }
+}
+
+public class ThreadTest {
+
+    public static void main(String args[]) {
+        Thread myThread = new MyThread();
+        myThread.run(); // #1
+        System.out.println("In main method; thread name is: " + Thread.currentThread().getName());
+    }
+}
+
+Ans : 
+
+Ques - 3
+----------
+class Worker extends Thread {
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName());
+    }
+}
+
+public class Master {
+    public static void main(String[] args) throws InterruptedException {
+        Thread.currentThread().setName("Master ");
+        Thread worker = new Worker();
+        worker.setName("Worker ");
+        worker.start();
+        Thread.currentThread().join();
+        System.out.println(Thread.currentThread().getName());
+    }
+}
+
+Ans : 
+
+Ques - 4
+----------
+Q1) Given:
+1. class TestA {
+2. public void start() { System.out.println("TestA"); }
+3. }
+4. public class TestB extends TestA {
+5. public void start() { System.out.println("TestB"); }
+6. public static void main(String[] args) {
+7. ((TestA)new TestB()).start();
+8. }
+9. }
+What is the result?
+A. TestA
+B. TestB
+C. Compilation fails.
+D. An exception is thrown at runtime.
+
+Ques - 5
+----------
+Given:
+public class TestOne implements Runnable {
+  public static void main (String[] args) throws Exception {
+  Thread t = new Thread(new TestOne());
+  t.start();
+  System.out.print("Started");
+  t.join();
+  System.out.print("Complete");
+8. }
+9. public void run() {
+10. for (int i = 0; i < 4; i++) {
+11. System.out.print(i);
+12. }
+13. }
+14. }
+What can be a result?
+A. Compilation fails.
+B. An exception is thrown at runtime.
+C. The code executes and prints "StartedComplete".
+D. The code executes and prints "StartedComplete0123".
+E. The code executes and prints "Started0123Complete".
+
+Ques - 6
+----------
+Given:
+ class MyThread extends Thread { 
+MyThread() { 
+System.out.print("MyThread ");
+ } 
+public void run() {
+ System.out.print("bar "); 
+}
+ public void run(String s)
+ { 
+System.out.print("baz ");
+ } 
+} 
+public class TestThreads { 
+public static void main (String [] args) { 
+Thread t = new MyThread() { public void run() { System.out.print("foo "); } }; t.start(); 
+} 
+} 
+What is the result? 
+A. foo 
+B. MyThread foo 
+C. MyThread bar 
+D. foo bar
+ E. foo bar baz 
+F. bar foo
+ G. Compilation fails 
+H. An exception is thrown at runtime
+
+Ques - 7
+----------
+Given: 
+3. public class Leader implements Runnable {
+ 4. public static void main(String[] args) { 
+5. Thread t = new Thread(new Leader()); 
+6. t.start(); 
+7. System.out.print("m1 "); 
+8. t.join(); 
+9. System.out.print("m2 "); 
+10. } 
+11. public void run() { 
+12. System.out.print("r1 "); 
+13. System.out.print("r2 "); 
+14. } 
+15. } 
+Which are true? 
+(Choose all that apply.) 
+A. Compilation fails 
+B. The output could be r1 r2 m1 m2
+ C. The output could be m1 m2 r1 r2 
+D. The output could be m1 r1 r2 m2 
+E. The output could be m1 r1 m2 r2 
+F. An exception is thrown at runtime
+
+Ques - 8
+----------
+class ThreadWorld {
+    public static void main(String[] args) throws Exception{
+      Thread th1 = new Thread();
+	System.out.println(th1.isAlive());
+	System.out.println(th1.getState());
+	Thread th2 = new Thread() {
+	    public void run() {
+	         System.out.println(Thread.currentThread().isAlive());
+	         System.out.println(Thread.currentThread().getState());
+	    }
+	};
+	th1.start();
+	th1.join();
+	th2.start();
+    }
+}
+
+Ans : 
+
+Ques - 9
+----------
+class ThreadWorld {
+    public static void main(String[] args) throws Exception{
+      Thread th1 = new Thread();
+	System.out.println(th1.isAlive());
+	System.out.println(th1.getState());
+	Thread th2 = new Thread() {
+	    public void run() {
+	         System.out.println(Thread.currentThread().isAlive());
+	         System.out.println(Thread.currentThread().getState());
+	    }
+	};
+	th1.start();
+	th1.join();
+	th2.start();
+	th2.join();
+	System.out.println(th1.isAlive());
+	System.out.println(th2.getState());
+    }
+}
+Ques - 10
+----------
+class Hello {
+    static Thread th;
+    static {
+        th = new Thread(()->System.out.println("I am in SB"));
+        th.start();
+    }
+    {
+        Runnable r = () -> System.out.println("I am in NSB");
+        th = new Thread(r);
+        th.start();
+    }
+    static void m1() {
+        th = new Thread(new Thread() {
+            public void run() {
+                System.out.println("I am in SM");
+            }
+        });
+        th.start();
+    }
+}
+public class ThreadWorld {
+    public static void main(String[] args) throws Exception{
+     Hello h = new Hello();
+     h.m1();
+     
+    }
+}

@@ -1,0 +1,242 @@
+4)Suppose you are tasked with developing a Java program to manage bank accounts for both savings and checking purposes. Your task is to implement classes for bank accounts, allowing customers to deposit money, withdraw funds, and earn interest on savings accounts.
+
+
+
+BankAccount Class:
+
+
+
+Implement a class BankAccount with an instance variable balance to represent the current balance.
+
+Include a parameterized constructor to initialize the balance.
+
+Implement methods deposit(double amount) and withdraw(double amount) to allow customers to deposit and withdraw money.
+
+Ensure that the withdraw() method checks for sufficient funds and prints an appropriate message if the balance is insufficient.
+
+
+
+SavingsAccount Class:
+
+
+
+Develop a subclass SavingsAccount inheriting from the BankAccount class.
+
+Include an additional instance variable interestRate to represent the annual interest rate.
+
+Implement a method calculateInterest() to calculate and add interest to the account balance based on the interest rate.
+
+  [interest = balance * interestRate / 100]
+
+Ensure that the interest is added only for savings accounts.
+
+
+
+CheckingAccount Class:
+
+
+
+Create another subclass CheckingAccount inheriting from the BankAccount class.
+
+This class does not have any additional functionality beyond the base class.
+
+
+
+MainBank Class:
+
+
+
+Develop a driver class named MainBank containing the main method to test the functionality of the bank account system.
+
+Create instances of both SavingsAccount and CheckingAccount classes to represent different types of accounts.
+
+Demonstrate the usage of deposit, withdraw, and interest calculation methods for savings accounts.
+
+Example Output:
+
+
+
+
+
+Previous Balance: 1000.0
+
+Deposited: 200.0
+
+Interest added: 10.0
+
+Savings Account Balance: 1210.0
+
+
+
+Previous Balance: 1000.0
+
+Deposited: 300.0
+
+Withdrawn: 100.0
+
+Checking Account Balance: 1200.0
+
+)Create a Employee Class with private attributes employeeId, employeeName, salary, designation.
+
+Implement a parameterised constructor to set the employee details based on the parameters provided (employeeId, employeeName, salary) and initialize the 3 attributes.
+
+
+
+Implement the setDesignation method to automatically set the designation based on the following conditions:
+
+
+
+If the salary is above 50000, set the designation as "Manager."
+
+If the salary is 50000 or below and at least 30000, set the designation as "Developer."
+
+If the salary is below 30000, set the designation as "Tester."
+
+Implement the getEmployeeDetails method to return a formatted string containing all the employee details.
+
+
+
+In the main method, create an instance of the Employee class, set employee details, and print the formatted employee details.
+
+2)Write the method with the following specifications: 
+
+
+
+Name of the BLC class:NextMultipleOfHundred
+
+
+
+Name of method: getNextMultipleOfHundred()
+
+
+
+Access Modifier : public, static
+
+
+
+Arguments: one argument of type integer
+
+
+
+Return type: an integer value
+
+
+
+For example,
+
+
+
+If the given value is 123, return 200.
+
+
+
+if the given value is negative or zero, return -1
+
+
+
+
+
+
+
+Create an ELC class Main to test the application
+
+
+3)Suppose you are working on developing a ticket booking system for various modes of transportation. Your task is to implement classes to represent different types of tickets, including train tickets, bus tickets, and flight tickets. Each ticket should store information such as the source, destination, price, and additional details specific to the mode of transportation.
+
+
+
+Ticket Class:
+
+
+
+Implement a base class Ticket with attributes to store the source, destination, and price of the ticket.
+
+Create a parameterized constructor to initialize these attributes.
+
+Include a method named displayTicketDetails() to print the details of the ticket.
+
+
+
+TrainTicket Class:
+
+
+
+Develop a subclass TrainTicket inheriting from the Ticket class.
+
+Add an additional attribute to store the train number.
+
+Override the displayTicketDetails() method to include the train number along with other ticket details.
+
+
+
+BusTicket Class:
+
+
+
+Create another subclass BusTicket inheriting from the Ticket class.
+
+Include an extra attribute to store the bus company name.
+
+Override the displayTicketDetails() method to print the bus company name along with other ticket details.
+
+
+
+FlightTicket Class:
+
+
+
+Implement a third subclass FlightTicket inheriting from the Ticket class.
+
+Add a new attribute to store the flight number.
+
+Override the displayTicketDetails() method to include the flight number in the ticket details.
+
+TicketBookingSystem Class:
+
+
+
+Develop a driver class named TicketBookingSystem containing the main method.
+
+Create instances of TrainTicket, BusTicket, and FlightTicket classes to represent different types of tickets.
+
+Demonstrate the functionality by calling the displayTicketDetails() method for each ticket object.
+
+Example Output:
+
+
+
+
+
+Train Ticket Details:
+
+Source: City A
+
+Destination: City B
+
+Price: 50
+
+Train Number: 123
+
+
+
+Bus Ticket Details:
+
+Source: City X
+
+Destination: City Y
+
+Price: 30
+
+Bus Company: XYZ Bus Company
+
+
+
+Flight Ticket Details:
+
+Source: City P
+
+Destination: City Q
+
+Price: 200
+
+Flight Number: ABC123

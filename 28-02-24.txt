@@ -1,0 +1,228 @@
+1. What is the process of defining a method in a subclass having
+  same name & type signature as a method in its superclass?
+a) Method overloading
+b) Method overriding
+c) Method hiding
+d) None of the mentioned
+Answer: b
+
+2.Which of these keywords can be used to prevent Method overriding?
+a) static
+b) constant
+c) protected
+d) final
+Anwer: d
+
+3.Which of these is supported by method overriding in Java?
+a) Abstraction
+b) Encapsulation
+c) Polymorphism
+d) a and c
+Answer: d
+
+4. What will be the output of the following Java program?
+
+   final class A 
+    {
+         int i;
+    }    
+    class B extends A 
+    {
+        int j;
+        System.out.println(j + " " + i);  
+    }    
+    class inheritance 
+    {
+        public static void main(String args[])
+        {
+            B obj = new B();
+            obj.display();     
+        }
+   }
+a) 2 2
+b) 3 3
+c) Runtime Error
+d) Compilation Error
+Answer: d
+
+5. What will be the output of the following Java program?
+
+    class A 
+    {
+        int i;
+        public void display() 
+        {
+            System.out.println(i);
+        }    
+    }    
+    class B extends A 
+   {
+        int j;
+        public void display() 
+        {
+            System.out.println(j);
+        } 
+    }    
+    class Dynamic_dispatch 
+   {
+        public static void main(String args[])
+        {
+            B obj2 = new B();
+            obj2.i = 1;
+            obj2.j = 2;
+            A r;
+            r = obj2;
+            r.display();     
+        }
+   }
+a) 1
+b) 2
+c) 3
+d) 4
+Answer: b
+
+6. class Base 
+{
+    public void show() 
+    {
+       System.out.println("Base");
+    }
+}
+class Derived extends Base 
+{
+    public void show() 
+    {
+       System.out.println("Derived");
+    }
+}
+public class Overriding 
+{
+    public static void main(String[] args) 
+    {
+        Base i = new Derived();
+        i.show();
+    }
+}
+a) Base
+b) Compilation Error
+c) Derived
+d) Runtime Error
+Answer: c
+
+7. class Base 
+{
+    public void show(int a) 
+    {
+       System.out.println("1");
+    }
+    public void show(double a) 
+    {
+       System.out.println("2");
+    }
+}  
+class Derived extends Base 
+{
+    public void show(int a) 
+    {
+       System.out.println("3");
+    }
+    public void show(double a) 
+    {
+       System.out.println("4");
+    }
+}  
+public class Override
+{
+    public static void main(String[] args) 
+    {
+        Base i = new Derived();
+        i.show(10.0);
+    }
+}
+a) 3
+b) 1
+c) 4
+d) 2
+Answer: 4
+
+9. class B
+{ 
+    protected final void Display() 
+    { 
+        System.out.println("B"); 
+    } 
+}  
+public class C extends B 
+{ 
+    protected final void Display() 
+    { 
+        System.out.println("C"); 
+    } 
+    public static void main(String[] args) 
+    { 
+        B obj = new B(); 
+        obj.Display(); 
+    } 
+}
+a) B
+b) C
+c) Runtime error
+d) Compilation error
+Answer: c
+
+10.class Derived1
+{ 
+    public int print() 
+    { 
+        System.out.println("Derived class"); 
+        return 0;
+    } 
+} 
+public class Base1 extends Derived1
+{ 
+    public void print() 
+    { 
+        System.out.println("Base class"); 
+    } 
+    public static void main(String[] args) 
+    { 
+        Derived1 obj = new Derived1(); 
+        obj.print(); 
+    } 
+}
+a) Base Class
+b) Derived Class
+c) Runtime error
+d) Compilation error
+Answer: d
+______________________________________________________________
+Programming Questions: 
+1.Create a superclass called Shape with a method calculateArea()
+that calculates and returns the area of the shape. Then, create
+subclasses Circle and Rectangle that override the calculateArea()
+method to provide their own implementation of area calculation.
+
+2.Write a program that demonstrates method overriding with 
+the toString() method. Create a superclass called Vehicle
+with a toString() method that returns the vehicle's name. 
+Then, create a subclass called Car that overrides the 
+toString() method to include additional information such
+as the car's model and year.
+
+3.Create a superclass called Animal with a method makeSound()
+that prints a generic sound. Then, create subclasses Dog and 
+Cat that override the makeSound() method to make specific 
+sounds like barking and meowing, respectively.
+
+4.Write a program that demonstrates method overriding with 
+the equals() method. Create a class called Person with instance 
+variables for name, age, and gender. Override the equals()
+method to compare two Person objects based on their name,
+age, and gender.
+
+5.Create a superclass called BankAccount with a method 
+calculateInterest() that calculates and returns the interest
+for a bank account. Then, create subclasses SavingsAccount 
+and CheckingAccount that override the calculateInterest()
+method to provide their own implementation of interest 
+calculation.

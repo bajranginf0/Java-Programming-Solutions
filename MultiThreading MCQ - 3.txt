@@ -1,0 +1,356 @@
+Ques - 1
+---------------
+Your task is to create a Java program that prints prime numbers and even numbers between 1 and 100 in a multithreaded manner. The rule is that after printing one prime number, the program should print one even number, and this pattern should continue until reaching 100.If one method logic reaches to 
+100 stop the program.
+
+Instructions:
+
+NumberPrinter Class:
+
+Create a NumberPrinter class with the following methods:
+printPrime(): A synchronized method that prints prime numbers and notifies the waiting thread to print even numbers.
+printEven(): A synchronized method that prints even numbers and notifies the waiting thread to print prime numbers.
+isPrime(int num): A helper method that checks if a given number is prime.
+
+printPrime Method:
+Inside the printPrime method, use a loop to print prime numbers. If a number is prime, print it, increment the current number, and notify the waiting thread. If the number is not prime, wait for the even thread to notify.
+
+printEven Method:
+Inside the printEven method, use a loop to print even numbers. If a number is even, print it, increment the current number, and notify the waiting thread. If the number is prime, wait for the prime thread to notify.
+
+isPrime Method:
+Implement the isPrime method to check if a given number is prime.
+
+
+Multithreaded Execution:
+In the MultithreadedNumberPrinter class (main), create an instance of NumberPrinter.
+Create two threads: one for printing prime numbers and the other for printing even numbers.
+Start both threads.
+
+Output:
+Run the program and observe the interleaved printing of prime and even numbers between 1 and 100, following the specified rule.
+
+Notes:
+
+Utilize the wait and notify mechanism for synchronization between prime and even threads.
+The isPrime method is a simple implementation to check if a number is prime. Adjustments can be made based on specific prime number generation requirements.
+
+Sample Output :
+---------------------
+Prime: 2
+Even: 2
+Prime: 3
+Even: 4
+Prime: 5
+Even: 6
+Prime: 7
+Even: 8
+Prime: 11
+Even: 10
+Prime: 13
+Even: 12
+Prime: 17
+Even: 14
+Prime: 19
+Even: 16
+Prime: 23
+Even: 18 ..........................................
+
+
+Ques - 1
+---------------
+public class TwoThreads {
+	static Thread th1, th2;
+
+	public static void main(String[] args) throws InterruptedException {
+		th1 = new Thread() {
+			public void run() {
+				System.out.print("A");
+				try {
+					th2.sleep(1000);
+				} catch (Exception e) {
+					System.out.print("B");
+				}
+			}
+		};
+		th2 = new Thread() {
+			public void run() {
+				System.out.print("D");
+				try {
+					th1.wait();
+				} catch (Exception e) {
+					System.out.print("E");
+				}
+			}
+		};
+		th1.start();th1.join();
+		th2.start();th2.join();
+	}
+}
+What is the output ?
+A.CompileTime Error
+B.AD
+C.ABD
+D.ADE
+	  
+Answer : 
+Ques - 2
+--------------
+public class NameList {
+	private List<String> names = Collections.synchronizedList(new LinkedList<String>());
+
+	public void add(String name) {
+		names.add(name);
+	}
+
+	public  String removeFirst() {
+		if (names.size() > 0)
+			return (String) names.remove(0);
+		else
+			return null;
+	}
+
+	public static void main(String[] args) throws InterruptedException {
+	    NameList nl = new NameList();
+		nl.add("NareshIt");
+		Thread th1 = new Thread(()->{String name = nl.removeFirst();
+		                              System.out.print(name+" ");
+		                            });
+		Thread th2 = new Thread(()->{String name = nl.removeFirst();
+		                              System.out.print(name);
+		                            });		
+		th1.start();th1.join();		
+		th2.start();th2.join();
+	}
+}
+
+What is the result of this code?
+A. The Output is random 
+B. It prints null null
+C. It prints NareshIt null
+D. It prints null NareshIt
+Answer - 
+
+Ques - 3
+----------------
+
+class Singer{
+	synchronized void sing(long id) {
+		for (int x = 1; x < 3; x++) {
+			System.out.print(id + " ");
+			Thread.yield();
+		}
+	}
+}
+
+public class Actor implements Runnable {
+	Singer c = new Singer();;
+
+	public static void main(String[] args) {
+		new Actor().go();
+	}
+
+	void go() {
+		
+		new Thread(new Actor()).start();
+		new Thread(new Actor()).start();
+	}
+
+	public void run() {
+		c.sing(new Thread(new Actor()).MIN_PRIORITY);
+	}
+}
+
+ What is the output?
+  A. Compile time error
+  B. IllegalThreadStateException 
+  C. 11 
+  D. 1111
+  
+  Answer-
+
+Ques - 4
+----------------
+public class Test implements Runnable {
+	public void run() {
+		try {
+			System.out.print("run. ");
+			throw new RuntimeException(" Problem ");
+
+		} catch (Exception e) {
+			System.out.print(" Handled ");
+		}
+
+	}
+
+	public static void main(String[] args) {
+		Thread t = new Thread(new Test());
+		t.start();
+		System.out.print (" End of method. ");
+	}
+}
+A.End of Method run Problem 
+B.End Of Method run handled
+C.Problem End of Method Handled
+D.None of the above
+
+Ans:
+
+Ques - 5
+--------------
+public class Test implements Runnable {
+	public void run() {
+			System.out.println("run.");
+	}
+
+	public static void main(String[] args) {
+            System.out.print("Main Start ");
+		Test t1 = new Test();
+		t1.start();
+	}
+}
+A.Main Start run.
+B.run Main start
+C.Compiletime error
+D.Runtime Exception
+
+Ans :
+
+Ques - 6
+-----------------
+class MyRunnable implements Runnable {
+	public void run() {
+			System.out.print(Thread.currentThread().getName()+" ");
+	}
+}
+
+public class Test {
+
+	public static void main(String[] args) throws InterruptedException {
+		MyRunnable r = new MyRunnable();
+
+		Thread t1 = new Thread();
+		Thread t2 = new Thread();
+		
+		t1.setName("Thread One");
+		t2.setName("Thread Two");
+		t1.start();
+		t2.start();
+			t1.sleep(100);
+		
+	}
+}
+A. Thread two Thread one
+B. Thread one
+C. (no output)
+D. Exception in main thread
+
+Ans-
+
+Ques - 7
+--------------
+How can Thread go from waiting to runnable state?
+
+a.notify/notifAll
+b.When sleep time is up
+c.Using resume() method when thread was suspended
+d.All
+
+Ans-
+
+Ques - 8
+--------------
+class MyThread extends Thread {
+	   public void run() {
+	      run(15);
+	   }
+	   public void start() {
+		   run(10);
+	   }
+	   public void run(int i) {
+	      System.out.print(10);
+	   }
+	}
+
+
+public class Test {
+
+		   public static void main(String[] args) {
+		      MyThread t = new MyThread();
+		      t.start();
+		   }
+		}
+
+A.15 10
+B.10
+C.15
+D.none of the above
+
+Ans-
+
+Ques - 9
+--------------
+class Bird {
+	public void eat() throws InterruptedException {
+		System.out.println("Eating insects");
+	}
+}
+ class Crow extends Bird {
+	public void eat()  throws  ClassNotFoundException{
+		System.out.println("Eating fish");
+		throw new ClassNotFoundException();
+	}
+ }
+public class MyException {
+    	    public static void main(String[] args) throws Exception {
+    	        Bird f = new Crow();
+    	        f.eat();
+    	    }
+    	}
+A.Eating insects Eating fish
+B.ClassNotFoundException at runtime
+C.Exception in thread "main" at compiletime: java.lang.Error (with reason msg)
+D. None of the above
+
+Ans: 
+
+Ques - 10
+---------------
+public class BlockFinal
+{
+    public static void main(String[] a)
+    {
+        try
+        {
+            int i = 10 / 0;
+        }
+        catch (Exception ex)
+        {
+            System.out.print("1st catch Block ");
+        }
+        finally
+        {
+            System.out.print("1st finally block ");
+        }
+        try
+        {
+            int i = 10 / 10;
+        }
+        catch (Exception ex)
+        {
+            System.out.println("2nd catch Block ");
+        }
+        finally
+        {
+            System.out.println("2nd finally block ");
+        }
+    }
+}
+
+A.1st finally block 2nd finally block
+B.1st catch Block 1st finally block 2nd catch Block 2nd finally block
+C.1st catch Block 1st finally block 2nd finally block
+D.1st finally block 2nd finally block
+
+Ans- 
+
